@@ -1,54 +1,89 @@
-# Valentine's Puzzle
+# 💌 Valentine's Puzzle
 
-A interactive sliding puzzle website to ask someone to be your Valentine!
+An interactive sliding puzzle website to ask your special someone to be your Valentine!
 
-## Features
+## ✨ Features
 
-- Animated envelope that opens on click
-- 3x3 sliding puzzle with your custom image
-- Beautiful animations and effects
-- Confetti celebration on "Yes"
-- Mobile responsive
+- 💌 Animated envelope with pulsing glow and romantic title
+- 🧩 3x3 sliding puzzle with your custom image
+- ⌨️ Typewriter effect on the greeting message
+- 💕 Floating hearts background animation
+- 💗 Heart-shaped confetti celebration
+- 🎵 Background music (plays on envelope open)
+- 📱 Fully responsive (works on mobile and desktop)
 
-## Setup
+## 🛠️ Setup
 
-1. **Add your image tiles:**
-   - Cut your image into 3 x 3 squares (I used Figma, but you can probably do this programatically)
-   - Place your 9 PNG tiles in the `images/` folder
-   - Also replace your full image with `images/full-image.png`
-   - Name them `tile-1.png` through `tile-9.png`
-   - Tiles should be numbered left-to-right, top-to-bottom:
-     ```
-     tile-1.png   tile-2.png   tile-3.png
-     tile-4.png   tile-5.png   tile-6.png
-     tile-7.png   tile-8.png   tile-9.png
-     ```
-   - `tile-3.png` will be the empty space (top-right) but appear once the puzzle is completed
+### 1. Add your image tiles
 
-2. **Change relevant strings**
-   - Unless your girl is also named "Gaby" it'd be real awkward if you forget to do this
-   - 
+Cut your image into a 3×3 grid and place the 9 PNGs in the `images/` folder:
 
-4. **Deploy to GitHub Pages:**
-   - Go to repository Settings
-   - Navigate to Pages section
-   - Source: Deploy from branch
-   - Branch: main (or master)
-   - Click Save
+```
+tile-1.png   tile-2.png   tile-3.png
+tile-4.png   tile-5.png   tile-6.png
+tile-7.png   tile-8.png   tile-9.png
+```
 
-5. **Share the link!**
-   - Your site will be at: `https://YOUR-USERNAME.github.io/valentine-puzzle/`
+- Tiles are numbered left-to-right, top-to-bottom
+- `tile-3.png` will be the empty space (top-right) but appears once the puzzle is completed
+- Also save the full image as `images/full-image.png`
 
-## How It Works
+> **Tip:** You can use Python with Pillow to split the image programmatically:
+> ```bash
+> poetry install
+> poetry run python split_image.py
+> ```
 
-0. **Stage 0:** Letter appears on screen (click to open)
-1. **Stage 1:** She solves the 3x3 sliding puzzle to reveal your photo
-2. **Stage 2:** The full image appears with "...you complete me." and "Will you be my Valentine?" and a Yes button
-3. **Stage 3:** When she clicks "Yes", it's celebration time!
+### 2. Change the text strings
 
-## Customization
+Edit `index.html` and update the relevant strings:
 
-You can customize the messages in `index.html` (e.g. the greeting, completion text, and success stage).
+- Title above the envelope (e.g. *"Para el amor de mi vida"*)
+- Puzzle greeting (e.g. *"Querida Meli..."*)
+- Completion message (e.g. *"...cada pieza me lleva a vos."*)
+- Final question (e.g. *"¿Querés ser mi Valentine?"*)
+- Celebration response
+
+### 3. Change the music (optional)
+
+Replace the file in `sounds/` and update the reference in `index.html`:
+
+```html
+<audio id="bgMusic" loop preload="auto">
+    <source src="sounds/your-song.mp3" type="audio/mpeg">
+</audio>
+```
+
+### 4. Deploy to GitHub Pages
+
+1. Push the repository to GitHub
+2. Go to **Settings** → **Pages**
+3. Source: **Deploy from branch**
+4. Branch: `main` (or `master`)
+5. Click **Save**
+
+### 5. Share the link!
+
+Your site will be at: `https://YOUR-USERNAME.github.io/your-repo/`
+
+## 🎮 How It Works
+
+| Stage | What happens |
+|-------|-------------|
+| **0** | Envelope appears with floating hearts and a romantic title |
+| **1** | Clicking it opens the envelope, starts the music, and reveals the 3x3 puzzle |
+| **2** | Solving the puzzle reveals the full image with your message |
+| **3** | Clicking "Yes" → heart confetti and celebration! |
+
+## 🎨 Customization
+
+Everything can be customized by editing `index.html`:
+
+- **Colors:** Look for the CSS values (`#FFDAE9`, `#c41e3a`, etc.)
+- **Fonts:** Swap the Google Font by changing the `<link>` in the `<head>`
+- **Music volume:** Change `bgMusic.volume = 0.4` (range `0.0` to `1.0`)
+- **Celebration GIF:** Replace `dudu.gif` with your own GIF
+- **Typewriter speed:** Adjust the `70` in the typewriter `setTimeout`
 
 ---
 

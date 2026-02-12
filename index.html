@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>❤️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,7 +15,7 @@
         }
 
         body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: 'Quicksand', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             color: #111;
             min-height: 100vh;
             display: flex;
@@ -603,11 +606,171 @@
             color: #111;
         }
 
+        /* ===== ROMANTIC ENHANCEMENTS ===== */
+
+        /* Floating hearts background */
+        .floating-hearts {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .floating-heart {
+            position: absolute;
+            bottom: -40px;
+            opacity: 0;
+            animation: floatUp linear infinite;
+            font-size: 20px;
+            filter: drop-shadow(0 0 2px rgba(255,150,180,0.3));
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 0;
+                transform: translateY(0) rotate(0deg) scale(0.5);
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.4;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) rotate(45deg) scale(1);
+            }
+        }
+
+        /* Envelope glow pulse */
+        .envelope {
+            animation: envelopeGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes envelopeGlow {
+            0%, 100% { box-shadow: 0 4px 20px rgba(0,0,0,0.12), 0 0 0 0 rgba(196, 30, 58, 0); }
+            50% { box-shadow: 0 4px 20px rgba(0,0,0,0.12), 0 0 25px 5px rgba(196, 30, 58, 0.2); }
+        }
+
+        .envelope.opening {
+            animation: none;
+        }
+
+        /* Big romantic title above envelope */
+        .envelope-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 36px;
+            font-weight: 700;
+            color: #c41e3a;
+            margin-bottom: 32px;
+            opacity: 0;
+            animation: titleFadeIn 1.5s ease 0.3s forwards;
+            text-shadow: 0 2px 10px rgba(196, 30, 58, 0.15);
+        }
+
+        @keyframes titleFadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (min-width: 768px) {
+            .envelope-title { font-size: 44px; }
+        }
+
+        @media (min-width: 1024px) {
+            .envelope-title { font-size: 52px; }
+        }
+
+        @media (max-width: 420px) {
+            .envelope-title { font-size: 28px; margin-bottom: 24px; }
+        }
+
+        /* Hint text below envelope */
+        .envelope-hint {
+            margin-top: 24px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 16px;
+            color: rgba(0,0,0,0.45);
+            animation: hintPulse 2.5s ease-in-out infinite;
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes hintPulse {
+            0%, 100% { opacity: 0.45; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Cursive romantic font for titles */
+        .modal-view .modal-title {
+            font-family: 'Dancing Script', cursive;
+            font-weight: 600;
+        }
+
+        .puzzle-reveal-text .complete-line {
+            font-family: 'Dancing Script', cursive;
+            font-weight: 600;
+            font-size: 22px;
+        }
+
+        .puzzle-reveal-text .valentine-question {
+            font-family: 'Dancing Script', cursive;
+            font-size: 24px;
+        }
+
+        /* Typewriter effect */
+        .typewriter {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid #c41e3a;
+            width: 0;
+            animation: typewriter 1.8s steps(18) 0.5s forwards, blink-caret 0.6s step-end infinite;
+            display: inline-block;
+        }
+
+        @keyframes typewriter {
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #c41e3a; }
+        }
+
+        .typewriter.done {
+            border-color: transparent;
+            animation: none;
+            width: 100%;
+        }
+
+        /* Heart confetti shape */
+        .confetti-heart {
+            position: fixed;
+            pointer-events: none;
+            font-size: 16px;
+            z-index: 9999;
+        }
+
+        @keyframes heartFall {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(360deg) scale(0.5);
+            }
+        }
+
     </style>
 </head>
 <body>
+    <!-- Floating hearts background -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+
     <!-- ENVELOPE: no modal, just envelope on pink background -->
     <div id="envelopeStage">
+        <p class="envelope-title">Para el amor de mi vida</p>
         <div class="envelope" id="envelope">
             <div class="envelope-heart" aria-hidden="true">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" clip-rule="evenodd" /></svg>
@@ -619,13 +782,14 @@
                 </svg>
             </div>
         </div>
+        <p class="envelope-hint">Tocá para abrir 💌</p>
     </div>
 
     <div class="container">
         <div class="modal-inner">
             <!-- VIEW: Puzzle (playing + completed state in same view) -->
             <div id="puzzleView" class="modal-view">
-                <h1 class="modal-title">Dear Gaby...</h1>
+                <h1 class="modal-title"><span class="typewriter" id="titleTypewriter">Querida Meli...</span></h1>
                 <div class="puzzle-container" id="puzzleContainer">
                     <div class="puzzle-grid-wrap" id="puzzleGridWrap">
                         <div class="puzzle-grid" id="puzzleGrid"></div>
@@ -635,35 +799,67 @@
                     </div>
                 </div>
                 <div class="puzzle-reveal-text" id="puzzleRevealText">
-                    <p class="complete-line">...you complete me.</p>
-                    <p class="valentine-question">Will you be my Valentine?</p>
-                    <button type="button" class="yes-only-btn" id="yesBtn">Yes</button>
+                    <p class="complete-line">...cada pieza me lleva a vos.</p>
+                    <p class="valentine-question">¿Querés ser mi Valentine?</p>
+                    <button type="button" class="yes-only-btn" id="yesBtn">Sí</button>
                 </div>
             </div>
 
             <!-- VIEW: Success -->
             <div id="successView" class="modal-view">
-                <p class="modal-title">Yay, I can't wait!</p>
+                <p class="modal-title">¡Yay, no puedo esperar!</p>
                 <div class="success-gif-wrap">
-                    <img src="giphy.gif" alt="" />
+                    <img src="dudu.gif" alt="" />
                 </div>
-                <button type="button" class="reset-btn" id="resetBtn">Reset</button>
+                <button type="button" class="reset-btn" id="resetBtn">Reiniciar</button>
             </div>
         </div>
     </div>
 
+    <audio id="bgMusic" loop preload="auto">
+        <source src="sounds/Taylor_Swift_The_Fate_of_Ophelia.mp3" type="audio/mpeg">
+    </audio>
+
     <script>
+        // ===== FLOATING HEARTS BACKGROUND =====
+        const floatingHeartsContainer = document.getElementById('floatingHearts');
+        const heartEmojis = ['💕', '💗', '💖', '🩷', '♥️', '💘'];
+        function spawnFloatingHeart() {
+            const heart = document.createElement('span');
+            heart.className = 'floating-heart';
+            heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.fontSize = (14 + Math.random() * 18) + 'px';
+            const duration = 6 + Math.random() * 8;
+            heart.style.animationDuration = duration + 's';
+            heart.style.animationDelay = '0s';
+            floatingHeartsContainer.appendChild(heart);
+            setTimeout(() => heart.remove(), duration * 1000);
+        }
+        // Spawn hearts periodically
+        setInterval(spawnFloatingHeart, 800);
+        // Spawn a few immediately
+        for (let i = 0; i < 8; i++) {
+            setTimeout(spawnFloatingHeart, i * 300);
+        }
+
         // ENVELOPE → MODAL (one modal, two views: puzzle + success)
         const envelopeStage = document.getElementById('envelopeStage');
         const envelope = document.getElementById('envelope');
         const puzzleGrid = document.getElementById('puzzleGrid');
         const puzzleView = document.getElementById('puzzleView');
         const successView = document.getElementById('successView');
+        const bgMusic = document.getElementById('bgMusic');
+        bgMusic.volume = 0.4;
         
         envelope.addEventListener('click', () => {
+            bgMusic.play().catch(() => {});
             envelope.style.pointerEvents = 'none';
             const heart = envelope.querySelector('.envelope-heart');
             heart.classList.add('hidden');
+            // Hide hint text
+            const hint = document.querySelector('.envelope-hint');
+            if (hint) hint.style.opacity = '0';
             setTimeout(() => {
                 envelope.classList.add('opening');
                 setTimeout(() => {
@@ -672,7 +868,12 @@
                         envelopeStage.style.display = 'none';
                         document.body.classList.add('show-modal');
                         requestAnimationFrame(() => {
-                            requestAnimationFrame(() => puzzleView.classList.add('visible'));
+                            requestAnimationFrame(() => {
+                                puzzleView.classList.add('visible');
+                                // Stop typewriter caret after animation ends
+                                const tw = document.getElementById('titleTypewriter');
+                                setTimeout(() => tw.classList.add('done'), 2500);
+                            });
                         });
                     }, 450);
                 }, 700);
@@ -814,15 +1015,30 @@
         }
         
         function createConfetti() {
-            const confetti = document.createElement('div');
-            confetti.className = 'confetti';
-            confetti.style.left = Math.random() * 100 + '%';
-            confetti.style.top = '-10px';
-            confetti.style.background = ['#f093fb', '#f5576c', '#ffd700', '#4facfe', '#FFDAE9'][Math.floor(Math.random() * 5)];
-            const duration = 2 + Math.random() * 2;
-            confetti.style.animation = `confetti-fall ${duration}s linear`;
-            document.body.appendChild(confetti);
-            setTimeout(() => confetti.remove(), (duration + 0.5) * 1000);
+            // Mix of heart emoji confetti and classic confetti
+            const useHeart = Math.random() > 0.3;
+            if (useHeart) {
+                const heart = document.createElement('span');
+                heart.className = 'confetti-heart';
+                heart.textContent = ['❤️', '💕', '💖', '💗', '🩷', '💘', '💝'][Math.floor(Math.random() * 7)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.top = '-20px';
+                heart.style.fontSize = (12 + Math.random() * 16) + 'px';
+                const duration = 2.5 + Math.random() * 2.5;
+                heart.style.animation = `heartFall ${duration}s linear`;
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), (duration + 0.5) * 1000);
+            } else {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.top = '-10px';
+                confetti.style.background = ['#f093fb', '#f5576c', '#ffd700', '#4facfe', '#FFDAE9'][Math.floor(Math.random() * 5)];
+                const duration = 2 + Math.random() * 2;
+                confetti.style.animation = `confetti-fall ${duration}s linear`;
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), (duration + 0.5) * 1000);
+            }
         }
     </script>
 </body>
