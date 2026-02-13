@@ -10,7 +10,9 @@ An interactive sliding puzzle website to ask your special someone to be your Val
 - 💕 Floating hearts background animation
 - 💗 Heart-shaped confetti celebration
 - 🎵 Background music (plays on envelope open)
-- 📱 Fully responsive (works on mobile and desktop)
+- 📸 Polaroid-style photo gallery carousel with swipe support
+- 🔢 Love counter (days since you met)
+- 📱 Mobile-optimized (touch targets, safe areas, dvh units, lazy loading)
 
 ## 🛠️ Setup
 
@@ -34,7 +36,11 @@ tile-7.png   tile-8.png   tile-9.png
 > poetry run python split_image.py
 > ```
 
-### 2. Change the text strings
+### 2. Add your gallery photos
+
+Place your photos in the `images/gallery/` folder named `gallery-1.jpg` through `gallery-N.jpg`. Then update the `<div class="gallery-track">` section in `index.html` with the matching polaroid entries and captions.
+
+### 3. Change the text strings
 
 Edit `index.html` and update the relevant strings:
 
@@ -44,7 +50,15 @@ Edit `index.html` and update the relevant strings:
 - Final question (e.g. *"¿Querés ser mi Valentine?"*)
 - Celebration response
 
-### 3. Change the music (optional)
+### 4. Set the love counter date
+
+Find the love counter section in the `<script>` and change the start date:
+
+```js
+const startDate = new Date(2025, 9, 10); // Oct 10, 2025 (months are 0-indexed)
+```
+
+### 5. Change the music (optional)
 
 Replace the file in `sounds/` and update the reference in `index.html`:
 
@@ -54,7 +68,7 @@ Replace the file in `sounds/` and update the reference in `index.html`:
 </audio>
 ```
 
-### 4. Deploy to GitHub Pages
+### 6. Deploy to GitHub Pages
 
 1. Push the repository to GitHub
 2. Go to **Settings** → **Pages**
@@ -62,7 +76,7 @@ Replace the file in `sounds/` and update the reference in `index.html`:
 4. Branch: `main` (or `master`)
 5. Click **Save**
 
-### 5. Share the link!
+### 7. Share the link!
 
 Your site will be at: `https://YOUR-USERNAME.github.io/your-repo/`
 
@@ -73,7 +87,7 @@ Your site will be at: `https://YOUR-USERNAME.github.io/your-repo/`
 | **0** | Envelope appears with floating hearts and a romantic title |
 | **1** | Clicking it opens the envelope, starts the music, and reveals the 3x3 puzzle |
 | **2** | Solving the puzzle reveals the full image with your message |
-| **3** | Clicking "Yes" → heart confetti and celebration! |
+| **3** | Clicking "Yes" → heart confetti, celebration GIF, love counter, and photo gallery! |
 
 ## 🎨 Customization
 
@@ -83,7 +97,9 @@ Everything can be customized by editing `index.html`:
 - **Fonts:** Swap the Google Font by changing the `<link>` in the `<head>`
 - **Music volume:** Change `bgMusic.volume = 0.4` (range `0.0` to `1.0`)
 - **Celebration GIF:** Replace `dudu.gif` with your own GIF
-- **Typewriter speed:** Adjust the `70` in the typewriter `setTimeout`
+- **Gallery captions:** Edit the `polaroid-caption` text for each photo
+- **Gallery autoplay speed:** Change `4000` in `setInterval(() => goTo(current + 1), 4000)`
+- **Floating hearts frequency:** Adjust the `setInterval` delay (default `800ms` desktop, `1500ms` mobile)
 
 ---
 
